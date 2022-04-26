@@ -1,6 +1,6 @@
 const { NotImplementedError } = require('../extensions/index.js');
 
-// const { Node } = require('../extensions/list-tree.js');
+const { Node } = require('../extensions/list-tree.js');
 
 /**
 * Implement simple binary search tree according to task description
@@ -8,19 +8,20 @@ const { NotImplementedError } = require('../extensions/index.js');
 */
 class BinarySearchTree {
   constructor(){
-    this.root = null;
+    this.head = null;
   }
+  
   root() {
-    return this.root;
+    return this.head;
   }
 
   add(data) {
-    const node = this.root;
+    const node = this.head;
     if (node === null){
-      this.root = new Node(data);
+      this.head = new Node(data);
       return;
     }else{
-      const searchTree = (node) => {
+      const searchTree = function(node) {
         if (data < node.data){
           if (node.left === null){
             node.left = new Node(data);
@@ -44,7 +45,7 @@ class BinarySearchTree {
   }
 
   has(data) {
-    let current = this.root;
+    let current = this.head;
     while (current) {
       if (data === current.data) {
         return true;
@@ -59,7 +60,7 @@ class BinarySearchTree {
   }
 
   find(data) {
-    let current = this.root;
+    let current = this.head;
     while (current.data !== data){
       if (data < current.data){
         current = current.left;
@@ -103,11 +104,11 @@ class BinarySearchTree {
         return node;
       }
     }
-    this.root = removeNode(this.root, data);
+    this.head = removeNode(this.head, data);
   }
 
   min() {
-    let current = this.root;
+    let current = this.head;
     while (current.left !== null){
       current = current.left;
     }
@@ -115,7 +116,7 @@ class BinarySearchTree {
   }
 
   max() {
-    let current = this.root;
+    let current = this.head;
     while (current.right !== null){
       current = current.right;
     }
