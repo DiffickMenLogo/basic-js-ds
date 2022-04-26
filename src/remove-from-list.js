@@ -22,56 +22,32 @@ const { ListNode } = require('../extensions/list-node.js');
  *   }
  * }
  */
-class LinkedList {
-  constructor() {
-    this.head = null;
-    this.length = 0;
-  }
-}
-function removeOnPosition(position){
-  if(position < 0 || position >= this.length){
-    return;
-  }
+function deleteFromList(list , value) {
+  let prev = list;
+  let curr = list.next;
 
-  let current = this.head;
 
-  if (position === 0) {
-    this.head = current.next;
-  }else{
-    let perv = null;
-    let i = 0;
-
-    while(i < position){
-      perv = current;
-      current = current.next;
-      i++;
+  while(prev.next !== null) {
+    if (curr.value === value) {
+      prev.next = curr.next;
+      curr = prev.next;
+      continue;
     }
 
-    perv.next = current.next;
+    curr = curr.next;
+    prev = prev.next;
   }
 
-  this.length--;
-  return current.value;
-}
-function indexOf(k){
-  let current = this.head;
-  let index = 0;
 
-  while(current){
-    if(current.value === k){
-      return index;
-    }
-
-    current = current.next;
-    index++;
+  if (list.value === value) {
+    return list.next;
   }
-
-  return -1;
+  return list;
 }
+
+
 function removeKFromList(l , k) {
-  while(indexOf(k)){
-    removeOnPosition(indexOf(k));
-  }
+  l = deleteFromList(l,k);
   return l;
 }
 
